@@ -20,7 +20,7 @@ const NewArticle: React.FC = () => {
       categoryId,
       readTime: Math.ceil(content.split(" ").length / 200), // rough estimate
       image: "/placeholder.jpg", // placeholder until you add uploads
-      content: [content],
+      content: content.split("\n").filter(p => p.trim() !== ""),
     });
 
     // Redirect to the public article page after saving
