@@ -120,7 +120,7 @@ const ArticleManagement = () => {
                         <Eye size={18} />
                       </Link>
                       <Link
-                        to={`/admin/articles/edit/${article.id}`}
+                        to={`/articles/edit/${article.id}`}
                         className="p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-500/10 rounded-lg transition-colors"
                         title="Edit"
                       >
