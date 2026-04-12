@@ -1,28 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   FileText, 
   MessageSquare, 
   LogOut, 
-  Plus, 
-  Edit2, 
-  Trash2, 
-  Search,
-  CheckCircle,
-  Clock,
   Menu,
   Eye
 } from 'lucide-react';
-import type { Article, Feedback } from '../../data/store';
-import { 
-  getArticles, 
-  getFeedback, 
-  deleteArticle, 
-  updateFeedbackStatus,
-  deleteFeedback,
-  logoutAdmin,
-} from '../../data/store';
 
 import ArticleManagement from "./ArticleManagement"; 
 import NewArticle from "./NewArticle";
@@ -35,10 +20,17 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const handleLogout = () => {
-    logoutAdmin();
-    navigate('/admin/login');
-  };
+const handleLogout = () => {
+  // Remove token
+  localStorage.removeItem("howtool_admin_token");
+
+  // Optionally clear other admin state
+  setArticles([]);
+  setSearchTerm("");
+
+  // Redirect to login
+  navigate("/admin/login");
+};
 
   const navItems = [
     { path: '/admin', label: 'Dashboard', icon: LayoutDashboard },
