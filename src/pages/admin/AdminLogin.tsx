@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Lock, User, Eye, EyeOff, Shield } from 'lucide-react';
-import { loginAdmin } from '../../data/store';
+import { adminLogin } from '../../services/api';
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -14,23 +14,26 @@ const AdminLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setIsLoading(true);
+  e.preventDefault();
+  setError("");
+  setIsLoading(true);
 
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 500));
+  try {
+    // Call backend login
+    const res = await adminLogin(formData);
+    const token = res.data.token;
 
-    const success = loginAdmin(formData.username, formData.password);
-    
-    if (success) {
-      navigate('/admin');
-    } else {
-      setError('Invalid username or password');
-    }
-    
-    setIsLoading(false);
-  };
+    // Save JWT for axios interceptor
+    localStorage.setItem("howtool_admin_token", token);
+
+    // Redirect to dashboard
+    navigate("/admin");
+  } catch (err) {
+    setError("Invalid username or password");
+  }
+
+  setIsLoading(false);
+};
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4">
