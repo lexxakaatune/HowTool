@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Plus, MessageSquare } from "lucide-react";
-import { fetchArticles } from "../../services/api";
+import { fetchArticles, fetchFeedbacks } from "../../services/api";
 
 // Dashboard Overview
 const DashboardOverview = () => {
@@ -13,7 +13,7 @@ const DashboardOverview = () => {
 
   useEffect(() => {
     const articles = fetchArticles();
-    const feedback = getFeedback();
+    const feedback = fetchFeedbacks();
     setStats({
       totalArticles: articles.length,
       featuredArticles: articles.filter(a => a.featured).length,
