@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addArticle } from "../../data/store";
+import { createArticle } from "../../services/api";
 import { categories } from "../../data/categories";
 import { useNavigate } from "react-router-dom";
 
@@ -8,9 +8,10 @@ const NewArticle: React.FC = () => {
   const [description, setDescription] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [category, setCategory] = useState("");
-  const [image, setImage] = useState(""); // Base64 image
+  const [image, setImage] = useState(null);
   const [featured, setFeatured] = useState(false);
   const [content, setContent] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,27 +27,39 @@ const NewArticle: React.FC = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    const contentArray = content
-      .split("\n")
-      .map((p) => p.trim())
-      .filter((p) => p !== "");
+  const contentArray = content
+    .split("\n")
+    .map((p) => p.trim())
+    .filter(Boolean);
 
-    const article = addArticle({
-      title,
-      description,
-      category,
-      categoryId,
-      readTime: Math.ceil(content.split(" ").length / 200),
-      image, // Base64 image
-      featured,
-      content: contentArray,
-    });
+  const form = new FormData();
+  form.append("title", title);
+  form.append("description", description);
+  form.append("category", category);
+  form.append("categoryId", categoryId);
+  form.append("readTime", String(Math.ceil(content.split(" ").length / 200)));
+  form.append("featured", String(Boolean(featured)));
+  form.append("content", JSON.stringify(contentArray));
+  form.append("videoUrl", videoUrl);
 
-    navigate(`/article/${article.id}`);
-  };
+  if (imageFile) {
+    form.append("image", imageFile);
+  }
+
+  try {
+    const res = await createArticle(form);
+    const created = res.data;
+    const id = created.id || created._id;
+
+    navigate(`/article/${id}`);
+  } catch (err) {
+    console.error("Create article failed", err);
+    alert("Failed to create article");
+  }
+};
 
   return (
     <div className="p-6 bg-dark-800 rounded-xl border border-dark-500">
@@ -113,6 +126,18 @@ const NewArticle: React.FC = () => {
             className="w-40 h-40 object-cover rounded border border-dark-500"
           />
         )}
+       
+        <div className="text-white">
+         <label className="block mb-1"> Upload Video</label>
+         <input
+          type="text"
+          value={videoUrl}
+          onChange={(e) => setVideoUrl(e.target.value)}
+          placeholder="Video URL (optional)"
+          className="text-white"
+          required
+         />
+        </div>
 
         <label className="text-white flex items-center gap-2">
           <input
