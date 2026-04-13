@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, BookOpen, Filter } from 'lucide-react';
-import type { Article } from '../data/store';
-import { getArticlesByCategory, categories } from '../data/store';
+import { fetchArticlesByCategory } from "../services/api";
+import type { Article, Category } from "../data/store";
+import { categories } from "../data/store"; // keep if categories are static
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import AdBanner from '../components/ads/AdBanner';
@@ -15,25 +16,42 @@ const CategoryPage = () => {
   const category = categories.find(c => c.id === categoryId);
 
   useEffect(() => {
-    if (categoryId) {
-      let categoryArticles = getArticlesByCategory(categoryId);
-      
+  const load = async () => {
+    if (!categoryId) return;
+    try {
+      const res = await fetchArticlesByCategory(categoryId);
+      let categoryArticles: Article[] = res.data || [];
+
       // Sort articles
       switch (sortBy) {
-        case 'newest':
-          categoryArticles = categoryArticles.reverse();
+        case "newest":
+          categoryArticles = categoryArticles.sort(
+            (a, b) =>
+              new Date(b.createdAt!).getTime() -
+              new Date(a.createdAt!).getTime()
+          );
           break;
-        case 'oldest':
-          // Already in oldest first
+        case "oldest":
+          categoryArticles = categoryArticles.sort(
+            (a, b) =>
+              new Date(a.createdAt!).getTime() -
+              new Date(b.createdAt!).getTime()
+          );
           break;
-        case 'readTime':
-          categoryArticles = categoryArticles.sort((a, b) => a.readTime - b.readTime);
+        case "readTime":
+          categoryArticles = categoryArticles.sort(
+            (a, b) => a.readTime - b.readTime
+          );
           break;
       }
-      
+
       setArticles(categoryArticles);
+    } catch (err) {
+      console.error("Failed to load category articles", err);
     }
-  }, [categoryId, sortBy]);
+  };
+  load();
+}, [categoryId, sortBy]);
 
   if (!category) {
     return (
