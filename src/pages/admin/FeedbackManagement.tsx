@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Eye, Clock, CheckCircle,Trash2 } from "lucide-react";
+import { Feedback } from "../../data/store";
 import { fetchFeedbacks } from "../../services/api";
  
 
