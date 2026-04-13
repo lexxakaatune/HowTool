@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Send, MessageSquare, Lightbulb, AlertCircle, CheckCircle } from 'lucide-react';
-import { addFeedback } from '../data/store';
+import { sendFeedback } from "../services/api";
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import AdBanner from '../components/ads/AdBanner';
@@ -18,28 +18,30 @@ const FeedbackPage = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    addFeedback(formData);
-    setIsSubmitting(false);
+  e.preventDefault();
+  setIsSubmitting(true);
+
+  try {
+    await sendFeedback(formData);   // call backend
     setIsSubmitted(true);
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        type: 'request',
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-      });
-    }, 3000);
-  };
+  } catch (err) {
+    console.error("Failed to send feedback", err);
+  }
+
+  setIsSubmitting(false);
+
+  // Reset form after 3 seconds
+  setTimeout(() => {
+    setIsSubmitted(false);
+    setFormData({
+      type: "request",
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
+  }, 3000);
+};
 
   const feedbackTypes = [
     { 
