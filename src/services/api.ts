@@ -27,6 +27,10 @@ export const deleteArticleById = (id: string) => api.delete(`/api/articles/${id}
 export const searchArticles = (q: string) => api.get("/api/articles", { params: { q }});
 export const sendFeedback = (payload: any) => api.post("/api/feedback", payload);
 export const fetchFeedbacks = () => api.get("/api/feedback");
+export const updateFeedbackStatus = (id: string, status: string) =>
+  api.put(`/api/feedback/${id}`, { status });
+export const deleteFeedback = (id: string) =>
+  api.delete(`/api/feedback/${id}`);
 
 // Admin auth
 export const adminLogin = (data: { username: string; password: string }) => api.post("/api/admin/login", data);
