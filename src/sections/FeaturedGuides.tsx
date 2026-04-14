@@ -13,7 +13,7 @@ const FeaturedGuides = () => {
   useEffect(() => {
     const load = async () => {
       try {
-        const res = await fetchFeaturedArticles();
+        const res = await getFeaturedArticles();
         setArticles(res.data || []);
       } catch (err) {
         console.error("Failed to load featured articles", err);
@@ -42,7 +42,6 @@ const FeaturedGuides = () => {
 
     return () => observer.disconnect();
   }, [articles]);
-};
 
   return (
     <section id="featured" className="relative py-20 md:py-32 bg-dark-700 overflow-hidden">
