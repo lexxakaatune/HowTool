@@ -81,7 +81,7 @@ const FeaturedGuides = () => {
           {articles.map((article, index) => (
             <Link
               key={article.id}
-              to={`/article/${article.id}`}
+              to={`/article/${article._id}`}
               ref={(el) => { cardRefs.current[index] = el; }}
               data-index={index}
               className={`group transition-all duration-700 ${
