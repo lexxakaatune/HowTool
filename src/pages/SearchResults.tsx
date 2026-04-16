@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Search, ArrowLeft, Clock, Filter, X } from 'lucide-react';
 import type { Article } from '../data/store';
-import { searchArticles } from '../data/store';
+import { searchArticles } from '../services/api';
 import Navigation from '../sections/Navigation';
 import Footer from '../sections/Footer';
 import AdBanner from '../components/ads/AdBanner';
@@ -15,22 +15,31 @@ const SearchResults = () => {
   const [searchInput, setSearchInput] = useState(query);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-  useEffect(() => {
-    setIsSearching(true);
-    const timer = setTimeout(() => {
-      let searchResults = searchArticles(query);
-      
-      // Filter by category if selected
-      if (selectedCategory !== 'all') {
-        searchResults = searchResults.filter(a => a.categoryId === selectedCategory);
-      }
-      
-      setResults(searchResults);
-      setIsSearching(false);
-    }, 300);
+useEffect(() => {
+  setIsSearching(true);
 
-    return () => clearTimeout(timer);
-  }, [query, selectedCategory]);
+  const timer = setTimeout(async () => {
+    try {
+      const res = await searchArticles(query);
+      let searchResults: Article[] = res.data || [];
+
+      // Filter by category if selected
+      if (selectedCategory !== "all") {
+        searchResults = searchResults.filter(
+          (a) => a.categoryId === selectedCategory
+        );
+      }
+
+      setResults(searchResults);
+    } catch (err) {
+      console.error("Search failed", err);
+    } finally {
+      setIsSearching(false);
+    }
+  }, 400); // debounce
+
+  return () => clearTimeout(timer);
+}, [query, selectedCategory]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
