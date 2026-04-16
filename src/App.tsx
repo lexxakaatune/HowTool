@@ -7,7 +7,10 @@ import ArticlePage from './pages/ArticlePage';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import FeedbackPage from './pages/FeedbackPage';
-import { isAdminLoggedIn } from './data/store';
+
+const isAdminLoggedIn = () => {
+  return !!localStorage.getItem("howtool_admin_token");
+};
 
 // Protected Route component
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
