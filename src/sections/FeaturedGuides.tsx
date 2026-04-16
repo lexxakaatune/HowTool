@@ -80,7 +80,7 @@ const FeaturedGuides = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
           {articles.map((article, index) => (
             <Link
-              key={article.id}
+              key={article._id}
               to={`/article/${article._id}`}
               ref={(el) => { cardRefs.current[index] = el; }}
               data-index={index}
