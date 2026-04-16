@@ -121,20 +121,20 @@ const ArticleManagement = () => {
                         <Eye size={18} />
                       </Link>
                       <Link
-                        to={`/admin/articles/edit/${article.id}`}
+                        to={`/admin/articles/edit/${article._id}`}
                         className="p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-500/10 rounded-lg transition-colors"
                         title="Edit"
                       >
                         <Edit2 size={18} />
                       </Link>
                       <button
-                        onClick={() => handleDelete(article.id)}
+                        onClick={() => handleDelete(article._id)}
                         className={`p-2 rounded-lg transition-colors ${
                           deleteConfirm === article._id
                             ? 'text-red-500 bg-red-500/10'
                             : 'text-gray-400 hover:text-red-500 hover:bg-red-500/10'
                         }`}
-                        title={deleteConfirm === article.id ? 'Click again to confirm' : 'Delete'}
+                        title={deleteConfirm === article._id ? 'Click again to confirm' : 'Delete'}
                       >
                         <Trash2 size={18} />
                       </button>
