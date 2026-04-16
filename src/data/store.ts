@@ -19,7 +19,7 @@ export interface Category {
 }
 
 export interface Article {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   category: string;
@@ -28,6 +28,8 @@ export interface Article {
   image: string;
   featured?: boolean;
   content?: string[];
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export const categories: Category[] = [
