@@ -131,8 +131,8 @@ const CategoryPage = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {articles.map((article, index) => (
               <Link
-                key={article.id}
-                to={`/article/${article.id}`}
+                key={article._id}
+                to={`/article/${article._id}`}
                 className="group bg-dark-800 rounded-xl overflow-hidden border border-dark-500 
                   hover:border-red-600/30 hover:shadow-card-hover transition-all duration-500
                   hover:-translate-y-1"
