@@ -19,7 +19,7 @@ export interface Category {
 }
 
 export interface Article {
-  id: string;
+  _id: string;
   title: string;
   description: string;
   category: string;
