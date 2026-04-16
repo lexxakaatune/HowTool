@@ -86,7 +86,7 @@ const ArticleManagement = () => {
             </thead>
             <tbody className="divide-y divide-dark-500">
               {filteredArticles.map((article) => (
-                <tr key={article.id} className="hover:bg-dark-700/50">
+                <tr key={article._id} className="hover:bg-dark-700/50">
                   <td className="px-6 py-4">
                     <div className="flex items-center gap-3">
                       <img 
@@ -113,7 +113,7 @@ const ArticleManagement = () => {
                   <td className="px-6 py-4">
                     <div className="flex items-center justify-end gap-2">
                       <Link
-                        to={`/article/${article.id}`}
+                        to={`/article/${article._id}`}
                         target="_blank"
                         className="p-2 text-gray-400 hover:text-white hover:bg-dark-700 rounded-lg transition-colors"
                         title="View"
@@ -130,7 +130,7 @@ const ArticleManagement = () => {
                       <button
                         onClick={() => handleDelete(article.id)}
                         className={`p-2 rounded-lg transition-colors ${
-                          deleteConfirm === article.id
+                          deleteConfirm === article._id
                             ? 'text-red-500 bg-red-500/10'
                             : 'text-gray-400 hover:text-red-500 hover:bg-red-500/10'
                         }`}
