@@ -79,8 +79,8 @@ const LatestArticles = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {articles.map((article, index) => (
             <Link
-              key={article.id}
-              to={`/article/${article.id}`}
+              key={article._id}
+              to={`/article/${article._id}`}
               ref={(el) => { cardRefs.current[index] = el; }}
               data-index={index}
               className={`group transition-all duration-700 ${
