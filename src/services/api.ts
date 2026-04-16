@@ -3,6 +3,11 @@ import axios from "axios";
 
 const baseURL = import.meta.env.REACT_APP_API_URL || "https://howtool-backend.onrender.com";
 
+const normalizeArticle = (a: any) => ({
+  ...a,
+  id: a._id,
+});
+
 export const api = axios.create({
   baseURL,
   headers: { Accept: "application/json" },
