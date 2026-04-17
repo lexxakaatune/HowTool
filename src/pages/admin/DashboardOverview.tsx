@@ -13,15 +13,24 @@ const DashboardOverview = () => {
   });
 
   useEffect(() => {
-    const articles = await fetchArticles();
-    const feedback = await fetchFeedbacks();
-    setStats({
-      totalArticles: articles.length,
-      featuredArticles: articles.filter(a => a.featured).length,
-      totalFeedback: feedback.length,
-      pendingFeedback: feedback.filter(f => f.status === 'pending').length,
-    });
-  }, []);
+  const loadData = async () => {
+    try {
+      const articles = await fetchArticles();   // returns Article[]
+      const feedback = await fetchFeedbacks();  // returns Feedback[]
+
+      setStats({
+        totalArticles: articles.length,
+        featuredArticles: articles.filter((a: Article) => a.featured).length,
+        totalFeedback: feedback.length,
+        pendingFeedback: feedback.filter((f: Feedback) => f.status === "pending").length,
+      });
+    } catch (err) {
+      console.error("Failed to load dashboard data:", err);
+    }
+  };
+
+  loadData();
+}, []);
 
   return (
     <div className="space-y-6">
