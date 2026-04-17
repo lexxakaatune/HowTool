@@ -77,7 +77,7 @@ export const categories: Category[] = [
   },
 ];
 
-export const articles: Article[] = [
+/* export const articles: Article[] = [
   // Featured Articles
   {
     id: 'repair-car-tyre-lexus',
@@ -241,4 +241,4 @@ export const articles: Article[] = [
     readTime: 6,
     image: '/HowToNew/article-succulents.jpg',
   },
-];
+]; */
