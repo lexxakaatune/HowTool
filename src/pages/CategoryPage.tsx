@@ -13,7 +13,7 @@ const CategoryPage = () => {
   const [articles, setArticles] = useState<Article[]>([]);
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'readTime'>('newest');
   
-  const category: Category = categories.find(c => c.id === categoryId);
+  const category: Category = categories.find(c => c.id === categoryId)!;
 
   useEffect(() => {
   const load = async () => {
