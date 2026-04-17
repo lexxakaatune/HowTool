@@ -14,10 +14,11 @@ const LatestArticles = () => {
     try {
       const res = await fetchArticles();
       // If you want "latest", you can sort by createdAt
-      const sorted = (res.data || []).sort(
-        (a: Article, b: Article) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      );
+      const sorted = (res.data || []).sort((a: Article, b: Article) => {
+  const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+  const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+  return dateB - dateA;
+});
       setArticles(sorted);
     } catch (err) {
       console.error("Failed to load latest articles", err);
