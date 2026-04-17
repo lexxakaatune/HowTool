@@ -13,8 +13,8 @@ const DashboardOverview = () => {
   });
 
   useEffect(() => {
-    const articles = fetchArticles();
-    const feedback = fetchFeedbacks();
+    const articles = await fetchArticles();
+    const feedback = await fetchFeedbacks();
     setStats({
       totalArticles: articles.length,
       featuredArticles: articles.filter(a => a.featured).length,
