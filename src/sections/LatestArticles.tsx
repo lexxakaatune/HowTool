@@ -14,7 +14,8 @@ const LatestArticles = () => {
     try {
       const res = await fetchArticles();
       // If you want "latest", you can sort by createdAt
-      const sorted = (res.data || []).sort((a: Article, b: Article) => {
+      const articlesArray = Array.isArray(data) ? data : [];  
+      const sorted = articlesArray.sort((a: Article, b: Article) => {
   const dateA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
   const dateB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
   return dateB - dateA;
