@@ -14,7 +14,9 @@ const FeaturedGuides = () => {
     const load = async () => {
       try {
         const res = await fetchFeaturedArticles();
-        setArticles(res.data || []);
+        const data = res.data;
+
+        setArticles(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Failed to load featured articles", err);
       }
