@@ -36,8 +36,9 @@ const UserLogin = () => {
       } else {
         navigate("/");
       }
-    } catch (err) {
-      setError(`${error2} ${err.message}`);
+    } catch (err: any) {
+      alert(err.response?.data);
+      setError(err.response?.data?.message || "Login failed");
     }
 
     setIsLoading(false);
