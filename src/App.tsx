@@ -7,6 +7,8 @@ import ArticlePage from './pages/ArticlePage';
 import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import FeedbackPage from './pages/FeedbackPage';
+import Register from './pages/auth/Register';
+import UserLogin from './pages/auth/UserLogin';
 import ErrorBoundary from "./ErrorBoundary";
 
 const isAdminLoggedIn = () => {
@@ -29,6 +31,10 @@ function App() {
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/article/:articleId" element={<ArticlePage />} />
         <Route path="/feedback" element={<FeedbackPage />} />
+
+        {/* Auth Routes */}
+        <Route path="/auth/register" element={<Register/>} />
+        <Route path="/auth/login" element={<UserLogin />} />
         
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
