@@ -37,14 +37,10 @@ export const deleteFeedback = (id: string) =>
   api.delete(`/api/feedback/${id}`);
 
 // User register
-export const registerUser = async (data: { username: string; email: string; password: string }) => {
-  return api.post("/auth/register", data);
-};
+export const registerUser = (data: { username: string; email: string; password: string }) => api.post("/auth/register", data);
 
 // User login
-export const userLogin = async (data: { email: string; password: string }) => {
-  return api.post("/auth/login", data);
-};
+export const userLogin = (data: { email: string; password: string }) => api.post("/auth/login", data);
 
 // Admin auth
 export const adminLogin = (data: { username: string; password: string }) => api.post("/api/admin/login", data);
