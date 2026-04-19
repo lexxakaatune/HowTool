@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, Search, MessageSquare } from 'lucide-react';
+import { Menu, X, Search, MessageSquare, LogIn, UserPlus } from 'lucide-react';
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -91,6 +91,26 @@ const Navigation = () => {
               <MessageSquare size={16} />
               <span className="hidden lg:inline">Feedback</span>
             </Link>
+
+            {/* Login Button */}
+            <Link
+              to="/auth/login"
+              className="flex items-center gap-2 px-4 py-2 bg-dark-700 text-white text-sm font-medium 
+                rounded-full hover:bg-dark-600 transition-colors"
+            >
+              <LogIn size={16} />
+              <span className="hidden lg:inline">Login</span>
+            </Link>
+
+            {/* Register Button */}
+            <Link
+              to="/auth/register"
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium 
+                rounded-full hover:bg-blue-700 transition-colors"
+            >
+              <UserPlus size={16} />
+              <span className="hidden lg:inline">Register</span>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -144,6 +164,28 @@ const Navigation = () => {
           >
             <MessageSquare size={18} />
             Send Feedback
+          </Link>
+       
+          {/* Mobile Login Button */}
+          <Link
+            to="/auth/login"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center justify-center gap-2 w-full py-3 bg-dark-700 text-white 
+              rounded-lg font-medium transition-colors"
+          >
+            <LogIn size={18} />
+            Login
+          </Link>
+
+          {/* Mobile Register Button */}
+          <Link
+            to="/auth/register"
+            onClick={() => setIsMobileMenuOpen(false)}
+            className="flex items-center justify-center gap-2 w-full py-3 bg-blue-600 text-white 
+              rounded-lg font-medium transition-colors"
+          >
+            <UserPlus size={18} />
+            Register
           </Link>
         </div>
       </div>
