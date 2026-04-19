@@ -39,7 +39,7 @@ export const deleteFeedback = (id: string) =>
 // User register
 export const registerUser = async (data: { username: string; email: string; password: string }) => {
   try {
-    const res = await api.post("/auth/register", data);
+    const res = await api.post("api/auth/register", data);
     return res.data.token;
   } catch (err: any) {
     // Capture backend error message if available
