@@ -22,9 +22,9 @@ const UserLogin = () => {
       // Call backend user login
       const res = await userLogin(formData);
       if (!res)
-        { const error2 = "no response" } else {"response"}
+        { const error2 = "no response" } else {const error2 = "response"}
       const { token, role } = res.data;
-      if ( !token || !role ) { const error2 = "no role or token"} else {"token and role"}
+      if ( !token || !role ) { const error2 = "no role or token"} else {const error2 = "token and role"}
 
       // Save JWT for axios interceptor
       localStorage.setItem("howtool_user_token", token);
