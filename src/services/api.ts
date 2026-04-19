@@ -40,7 +40,7 @@ export const deleteFeedback = (id: string) =>
 export const registerUser = async (data: { username: string; email: string; password: string }) => {
   try {
     const res = await api.post("/auth/register", data);
-    return res.data;
+    return res.data.token;
   } catch (err: any) {
     // Capture backend error message if available
     const message = err.response?.data?.message || err.response?.data?.error || "Registration failed";
