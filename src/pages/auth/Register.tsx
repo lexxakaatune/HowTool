@@ -21,7 +21,7 @@ const Register = () => {
 
     try {
       // Call backend register API
-      const token = registerUser(formData);
+      const token = await registerUser(formData);
 
       // Save JWT for axios interceptor
       localStorage.setItem("howtool_user_token", token);
