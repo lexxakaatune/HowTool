@@ -70,7 +70,7 @@ const UserLogin = () => {
           {/* Error Message */}
           {error && (
             <div className="mb-6 p-4 bg-red-600/10 border border-red-600/30 rounded-lg text-red-500 text-sm">
-              {error}
+              {erro}
             </div>
           )}
 
