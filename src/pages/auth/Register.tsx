@@ -157,12 +157,12 @@ const Register = () => {
 
           {/* Back Link */}
           <div className="mt-6 text-center">
-            <a
-              href="/login"
+            <Link
+              to="/auth/login"
               className="text-gray-400 hover:text-white text-sm transition-colors"
             >
               Already have an account? Sign In →
-            </a>
+            </Link>
           </div>
         </div>
       </div>
