@@ -39,7 +39,7 @@ export const deleteFeedback = (id: string) =>
 // User register
 export const registerUser = async (data: { username: string; email: string; password: string }) => {
   try {
-    const res = await api.post("api/auth/register", data);
+    const res = await api.post("/api/auth/register", data);
     return res.data.token;
   } catch (err: any) {
     // Capture backend error message if available
@@ -49,7 +49,7 @@ export const registerUser = async (data: { username: string; email: string; pass
 };
 
 // User login
-export const userLogin = (data: { email: string; password: string }) => api.post("/auth/login", data);
+export const userLogin = (data: { email: string; password: string }) => api.post("/api/auth/login", data);
 
 // Admin auth
 export const adminLogin = (data: { username: string; password: string }) => api.post("/api/admin/login", data);
