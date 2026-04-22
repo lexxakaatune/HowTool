@@ -9,6 +9,7 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import FeedbackPage from './pages/FeedbackPage';
 import Register from './pages/auth/Register';
 import UserLogin from './pages/auth/UserLogin';
+import CheckEmailPage from './pages/auth/CheckEmailPage';
 import ErrorBoundary from "./ErrorBoundary";
 
 const isAdminLoggedIn = () => {
@@ -35,6 +36,7 @@ function App() {
         {/* Auth Routes */}
         <Route path="/auth/register" element={<Register/>} />
         <Route path="/auth/login" element={<UserLogin />} />
+        <Route path="/auth/check-email" element={<CheckEmailPage />} />
         
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
