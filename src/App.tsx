@@ -8,7 +8,7 @@ import AdminLogin from './pages/admin/AdminLogin';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import FeedbackPage from './pages/FeedbackPage';
 import TermsOfUsePage from './pages/TermsOfUsePage';
-import PrivacyPolicy from './pages/PrivacyPolicyPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import Register from './pages/auth/Register';
 import UserLogin from './pages/auth/UserLogin';
 import CheckEmailPage from './pages/auth/CheckEmailPage';
