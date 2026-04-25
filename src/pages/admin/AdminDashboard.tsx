@@ -36,7 +36,7 @@ const handleLogout = () => {
   }
 
   // Redirect to login
-  navigate("/admin/login");
+  navigate("/auth/login");
 };
 
   const navItems = [
