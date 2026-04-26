@@ -67,10 +67,12 @@ const NewArticle: React.FC = () => {
     const id = created.id || created._id;
 
     navigate(`/article/${id}`);
-  } catch (err) {
-    console.error("Create article failed", err);
-    alert(`Failed to create article ${err.message}`);
-  }
+  } catch (err: any) {
+  // If backend sent a JSON error like { error: "...", message: "..." }
+  const backendError = err.response?.data?.error || err.response?.data?.message || err.message;
+
+  console.error("Create article failed:", backendError);
+  alert(Error: ${backendError});
 };
 
   return (
