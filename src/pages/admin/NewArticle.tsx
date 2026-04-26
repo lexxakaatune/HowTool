@@ -73,7 +73,8 @@ const NewArticle: React.FC = () => {
 
   console.error("Create article failed:", backendError);
   alert(`Error: ${backendError}`);
-};
+  }
+}
 
   return (
     <div className="p-6 bg-dark-800 rounded-xl border border-dark-500">
