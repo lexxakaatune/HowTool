@@ -27,6 +27,14 @@ export const createArticle = (formData: FormData) =>
 export const updateArticle = (id: string, payload: any) => api.put(`/api/articles/${id}`, payload);
 export const deleteArticleById = (id: string) => api.delete(`/api/articles/${id}`);
 
+// Categories
+// Categories
+export const fetchCategories = () => api.get("/api/categories");
+export const fetchCategoryById = (id: string) => api.get(`/api/categories/${id}`);
+export const createCategory = (payload: any) => api.post("/api/categories", payload);
+export const updateCategory = (id: string, payload: any) => api.put(`/api/categories/${id}`, payload);
+export const deleteCategory = (id: string) => api.delete(`/api/categories/${id}`);
+
 // Search and feedback
 export const searchArticles = (q: string) => api.get("/api/articles", { params: { q }});
 export const sendFeedback = (payload: any) => api.post("/api/feedback", payload);
