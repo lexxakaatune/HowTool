@@ -34,6 +34,7 @@ export const fetchCategoryById = (id: string) => api.get(`/api/categories/${id}`
 export const createCategory = (payload: any) => api.post("/api/categories", payload);
 export const updateCategory = (id: string, payload: any) => api.put(`/api/categories/${id}`, payload);
 export const deleteCategory = (id: string) => api.delete(`/api/categories/${id}`);
+export const fetchCategoriesWithCount = () => api.get("/api/categories/with-count");
 
 // Search and feedback
 export const searchArticles = (q: string) => api.get("/api/articles", { params: { q }});
