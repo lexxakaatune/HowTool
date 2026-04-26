@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import type { Article, Feedback } from "../../data/store";
+import type { Article, Feedback, Category } from "../../data/store";
 import { Plus, MessageSquare } from "lucide-react";
-import { fetchArticles, fetchFeedbacks } from "../../services/api";
+import { fetchArticles, fetchCategories, fetchFeedbacks } from "../../services/api";
 
 // Dashboard Overview
 const DashboardOverview = () => {
   const [stats, setStats] = useState({
     totalArticles: 0,
+    totalCategories: 0,
     featuredArticles: 0,
     totalFeedback: 0,
     pendingFeedback: 0,
@@ -18,12 +19,15 @@ const DashboardOverview = () => {
     try {
       const articlesRes = await fetchArticles();   // returns Article[]
       const articles: Article[] = articlesRes.data;
+      const categoriesRes = await fetchCategories();
+      const categories: Category[] = categoriesRes.data;
       const feedbackRes = await fetchFeedbacks();  // returns Feedback[]
       const feedback: Feedback[] = feedbackRes.data;
 
       setStats({
         totalArticles: articles.length,
         featuredArticles: articles.filter((a: Article) => a.featured).length,
+        totalCategories: categories.length,
         totalFeedback: feedback.length,
         pendingFeedback: feedback.filter((f: Feedback) => f.status === "pending").length,
       });
@@ -43,6 +47,8 @@ const DashboardOverview = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="bg-dark-800 rounded-xl border border-dark-500 p-6">
           <div className="text-gray-400 text-sm mb-2">Total Articles</div>
+          <div className="text-3xl font-bold text-white">{stats.totalCategories}</div>
+        </div>
           <div className="text-3xl font-bold text-white">{stats.totalArticles}</div>
         </div>
         <div className="bg-dark-800 rounded-xl border border-dark-500 p-6">
@@ -69,6 +75,13 @@ const DashboardOverview = () => {
           >
             <Plus size={18} />
             Create Article
+          </Link>
+          <Link
+            to="/admin/categories/new"
+            className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+          >
+            <Plus size={18} />
+            Create Category
           </Link>
           <Link
             to="/admin/feedback"
