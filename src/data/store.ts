@@ -15,7 +15,7 @@ export interface Category {
   name: string;
   description: string;
   image: string;
-  articleCount: number;
+  articleCount?: number;
 }
 
 export interface Article {
